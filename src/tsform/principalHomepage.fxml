@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.PrincipalHomepageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b9ebf" height="385.0" layoutX="4.0" layoutY="7.0" stroke="#dd0e0e" strokeType="INSIDE" width="589.0" />
+      <Label fx:id="msgfield" alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="25.0" prefWidth="179.0" text="Select your class" textFill="#eb2121">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="347.0" layoutY="44.0" mnemonicParsing="false" onAction="#showlistbuttonhandler" prefHeight="30.0" prefWidth="165.0" text="show Student List">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="345.0" layoutY="97.0" mnemonicParsing="false" onAction="#assigncourseteacher" prefHeight="30.0" prefWidth="165.0" text="Assign Course Teacher">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="29.0" layoutY="348.0" mnemonicParsing="false" onAction="#backbuttonhandler" prefHeight="30.0" prefWidth="63.0" text="Back" textFill="#b91414">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="classchoicebox" layoutX="173.0" layoutY="47.0" prefWidth="150.0" />
+      <Button layoutX="344.0" layoutY="340.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="30.0" prefWidth="165.0" text="Change Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="345.0" layoutY="193.0" mnemonicParsing="false" onAction="#Admission" prefHeight="30.0" prefWidth="165.0" text="Admission">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="345.0" layoutY="239.0" mnemonicParsing="false" onAction="#addTeacher" prefHeight="30.0" prefWidth="165.0" text="Add Teacher">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="344.0" layoutY="289.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="30.0" prefWidth="165.0" text="Add Course">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="teachernamefield" layoutX="137.0" layoutY="242.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Teacher Name" />
+      <TextField fx:id="coursenamefield" layoutX="137.0" layoutY="292.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Course name" />
+      <Label fx:id="namemsgbox" layoutX="20.0" layoutY="245.0" prefHeight="17.0" prefWidth="99.0" textFill="#da1212">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="coursemsgbox" layoutX="20.0" layoutY="295.0" prefHeight="17.0" prefWidth="99.0" textFill="#c61111">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="347.0" layoutY="146.0" mnemonicParsing="false" onAction="#MeritListHandler" prefHeight="30.0" prefWidth="165.0" text="Merit List">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="20.0" layoutY="29.0" mnemonicParsing="false" onAction="#clearDataHandler" text="Clear Data">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

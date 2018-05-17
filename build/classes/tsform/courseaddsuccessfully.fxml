@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="tsform.CourseaddsuccessfullyController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332172" height="382.0" layoutX="8.0" layoutY="9.0" stroke="BLACK" strokeType="INSIDE" width="585.0" />
+      <Label fx:id="msgfield" layoutX="31.0" layoutY="127.0" text="you have successfully added Mr. x as a biology teacher of class 10" textFill="#cee402">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="229.0" layoutY="236.0" mnemonicParsing="false" onAction="#okbuttonhandler" prefHeight="25.0" prefWidth="63.0" text="ok" textFill="#eb0c0c">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
