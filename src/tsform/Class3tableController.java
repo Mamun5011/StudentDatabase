@@ -7,8 +7,15 @@ package tsform;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -73,8 +80,13 @@ public class Class3tableController implements Initializable {
     private final ObservableList<Record> data = FXCollections.observableArrayList();
     @FXML
     private Button deletebutton;
-    int flag=0;
+    int flag=0,i;
     String Pressed="";
+    @FXML
+    private TableColumn<Record,Double> LAB;
+    
+    int num=0;
+    String className;
     
    
   
@@ -85,6 +97,7 @@ public class Class3tableController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
      msgbox.setText("Continuous Evaluation"); 
      TSform.count=5;
+     i=1;
    
      
         addbutton.setOnAction(btnNewHandler);
@@ -98,9 +111,22 @@ public class Class3tableController implements Initializable {
      TERM1.setCellValueFactory(new PropertyValueFactory<Record, Double>("studentTerm1"));
      TERM2.setCellValueFactory(new PropertyValueFactory<Record, Double>("studentTerm2"));
      TERM3.setCellValueFactory(new PropertyValueFactory<Record, Double>("studentTerm3"));
+     LAB.setCellValueFactory(new PropertyValueFactory<Record, Double>("studentLab"));
      
       
-      table.setItems(getData()); 
+        try { 
+            
+            
+            table.setItems(getData());
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Class3tableController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Class3tableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
       table.setEditable(true);
       
  roll.setCellFactory(TextFieldTableCell.<Record, Integer>forTableColumn(new IntegerStringConverter()));
@@ -111,7 +137,7 @@ public class Class3tableController implements Initializable {
   TERM1.setCellFactory(TextFieldTableCell.<Record, Double>forTableColumn(new DoubleStringConverter()));
  TERM2.setCellFactory(TextFieldTableCell.<Record, Double>forTableColumn(new DoubleStringConverter()));
  TERM3.setCellFactory(TextFieldTableCell.<Record, Double>forTableColumn(new DoubleStringConverter()));
- 
+  LAB.setCellFactory(TextFieldTableCell.<Record, Double>forTableColumn(new DoubleStringConverter()));
  
 table.getSelectionModel().setCellSelectionEnabled(true);
  table.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -226,34 +252,137 @@ selectedCells.addListener(new ListChangeListener<TablePosition>() {
         @Override
         public void handle(ActionEvent t) {
              
-            //generate new Record with random number
-            int newId =TSform.count++;
-            double a=0.00;
-            Record newRec = new Record(
-                    newId,"Your name",a,a,a,a,a,a);
-                      data.add(newRec);
+            try {
+                //generate new Record with random number
+                
+                Connection c = null;
+                Statement stmt = null;            
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+                stmt = c.createStatement();
+                
+                
+                int newId =TSform.count++;
+                double a=0.00;
+                Record newRec = new Record(
+                        i++,"Your name",a,a,a,a,a,a,a);
+                data.add(newRec);
+                int k=i-1;
+                
+          String sql = "INSERT INTO Class"+TSform.clss+" " +        
+                        "VALUES ('"+TSform.subject+"',100,'not updated',0.00,0.00,0.00,0.00,0.00,0.00,0.00,'"+TSform.clss+"','Your Name',"+k+");"; 
+     // String sql = "INSERT INTO Login (Name,Password,Type,Contact,Email) " + "VALUES (name,pass,tp,contact,email);"; 
+         stmt.executeUpdate(sql);
+         stmt.close();
+         c.close();
+                
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Class3tableController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Class3tableController.class.getName()).log(Level.SEVERE, null, ex);
+            }
              
         }
     };
     
     
-    public ObservableList<Record> getData()
+    public ObservableList<Record> getData() throws ClassNotFoundException, SQLException
 {
 
  // ObservableList<Record> studentInfo=FXCollections.observableArrayList();
-        data.add(new Record(1,"Raj",3.00,4.00,5.00,6.00,7.00,1.00));
-        data.add(new Record(2,"Rahul",3.00,4.00,5.00,6.00,7.00,1.00));
-        data.add(new Record(3,"Kiron",3.00,4.00,5.00,6.00,7.00,1.00));
-        data.add(TSform.testRecord);
+      Connection c = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+     Class.forName("org.sqlite.JDBC");
+     c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+      stmt = c.createStatement();
+      
+       if(TSform.clss.equals("6"))
+       {
+           className="6";
+           rs = stmt.executeQuery( "SELECT * FROM Class6;" );
+       }
+       else if(TSform.clss.equals("7"))
+       {
+           className="7";
+           rs = stmt.executeQuery( "SELECT * FROM Class7;" );
+       }
+       else if(TSform.clss.equals("8"))
+       {
+           className="8";
+           rs = stmt.executeQuery( "SELECT * FROM Class8;" );
+       }
+       else if(TSform.clss.equals("9"))
+       {
+           className="9";
+           rs = stmt.executeQuery( "SELECT * FROM Class9;" );
+       }
+       else 
+       {
+           className="10";
+           rs = stmt.executeQuery( "SELECT * FROM Class10;" );
+           
+       }
+       
+             
+      while(rs.next())
+      {
+          i++;
+          String  className = rs.getString("CLASS");
+          String subj=rs.getString("Subject");
+          if(className.equals(TSform.clss) && subj.equals(TSform.subject) )
+          {
+              int id=rs.getInt("Roll");
+              String name=rs.getString("studentName");
+              String CT1=rs.getString("CT1");
+              String CT2=rs.getString("CT2");
+              String CT3=rs.getString("CT3");
+              String TERM1=rs.getString("TERM1");
+              String TERM2=rs.getString("TERM2");
+              String TERM3=rs.getString("TERM3");
+              String LAB=rs.getString("LAB");
+              
+              
+              Record S=new Record(id,name,Double.parseDouble(CT1),Double.parseDouble(CT2),Double.parseDouble(CT3),Double.parseDouble(TERM1),Double.parseDouble(TERM2),Double.parseDouble(TERM3),Double.parseDouble(LAB));
+              data.add(S);
+          }
+      
+      }
+      
+      rs.close();
+      stmt.close();
+      c.close();
+    
+       // data.add(new Record(1,"Raj",3.00,4.00,5.00,6.00,7.00,1.00,25.00));
+        //data.add(new Record(2,"Rahul",3.00,4.00,5.00,6.00,7.00,1.00,25.00));
+       // data.add(new Record(3,"Kiron",3.00,4.00,5.00,6.00,7.00,1.00,25.00));
+       // data.add(TSform.testRecord);
         return data;
   
 }
     
     @FXML
-    public void changeRollcellEvent(CellEditEvent editedCell)
+    public void changeRollcellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
     int oldValue=(int) editedCell.getOldValue();
     int newValue=(int) editedCell.getNewValue();
+    
+                    Connection c = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+     Class.forName("org.sqlite.JDBC");
+     c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+     stmt = c.createStatement();
+    
+    Record ss=table.getSelectionModel().getSelectedItem();
+    String val=""+editedCell.getNewValue();
+                  String sql = "UPDATE Class"+className+" " +
+                        "SET Roll= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+                 stmt.executeUpdate(sql);
+                 c.close();
+                 stmt.close(); 
+    
     
     Record recordSelected=table.getSelectionModel().getSelectedItem();
     recordSelected.setStudentroll((int) editedCell.getNewValue());
@@ -275,44 +404,155 @@ selectedCells.addListener(new ListChangeListener<TablePosition>() {
     
     
     @FXML
-        public void changeNamecellEvent(CellEditEvent editedCell)
+        public void changeNamecellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
-        Record recordSelected=table.getSelectionModel().getSelectedItem();
+      Connection c = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+     Class.forName("org.sqlite.JDBC");
+     c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+      stmt = c.createStatement();
+      
+      
+//   rs = stmt.executeQuery( "SELECT * FROM Class"+className+";" );
+//   while(rs.next())
+//   {
+//       
+//       String ff=rs.getString("studentName");
+//       System.out.println(""+ff);
+//   }
+   
+   
+    Record ss=table.getSelectionModel().getSelectedItem();
+    String val=""+editedCell.getNewValue();
+    
+    System.out.println(""+ss.getStudentName()+" is changing with "+val+"class "+TSform.clss+" sub: "+TSform.subject);
+    
+                  String sql = "UPDATE Class"+className+" " +
+                        "SET studentName= '"+val +"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+                 stmt.executeUpdate(sql);
+                 c.close();
+                 stmt.close();
+              
+              
+    
+    Record recordSelected=table.getSelectionModel().getSelectedItem();
+
     recordSelected.setStudentName((String) editedCell.getNewValue());
 }
         
     @FXML
-         public void changeCT1cellEvent(CellEditEvent editedCell)
+         public void changeCT1cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
-        Record recordSelected=table.getSelectionModel().getSelectedItem();
-    recordSelected.setStudentCt1((Double) editedCell.getNewValue());
+       
+            Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            
+            String sql = "UPDATE Class"+className+" " +
+                    "SET CT1= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
+            Record recordSelected=table.getSelectionModel().getSelectedItem();
+            recordSelected.setStudentCt1((Double) editedCell.getNewValue());
+       
 }  
          
     @FXML
-         public void changeCT2cellEvent(CellEditEvent editedCell)
+         public void changeCT2cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
-        Record recordSelected=table.getSelectionModel().getSelectedItem();
-    recordSelected.setStudentCt2((Double) editedCell.getNewValue());
+        
+            Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET CT2= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
+            Record recordSelected=table.getSelectionModel().getSelectedItem();
+            recordSelected.setStudentCt2((Double) editedCell.getNewValue());
+     
 }  
          
     @FXML
-          public void changeCT3cellEvent(CellEditEvent editedCell)
+          public void changeCT3cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
+                Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET CT3= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
         Record recordSelected=table.getSelectionModel().getSelectedItem();
     recordSelected.setStudentCt3((Double) editedCell.getNewValue());
 }  
           
           
     @FXML
-          public void changeTERM1cellEvent(CellEditEvent editedCell)
+          public void changeTERM1cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
+                Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET TERM1= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
         Record recordSelected=table.getSelectionModel().getSelectedItem();
     recordSelected.setStudentTerm1((Double) editedCell.getNewValue());
 }  
           
     @FXML
-          public void changeTERM2cellEvent(CellEditEvent editedCell)
+          public void changeTERM2cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
+                Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET TERM2= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
         Record recordSelected=table.getSelectionModel().getSelectedItem();
     recordSelected.setStudentTerm2((Double) editedCell.getNewValue());
 }  
@@ -320,14 +560,44 @@ selectedCells.addListener(new ListChangeListener<TablePosition>() {
           
  
     @FXML
-                   public void changeTERM3cellEvent(CellEditEvent editedCell)
+                   public void changeTERM3cellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException
 {
+                Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET TERM3= '"+val+"' WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
         Record recordSelected=table.getSelectionModel().getSelectedItem();
     recordSelected.setStudentTerm3((Double) editedCell.getNewValue());
 }  
 
     @FXML
-    private void deleteRowFromTable(ActionEvent event) {
+    private void deleteRowFromTable(ActionEvent event) throws ClassNotFoundException, SQLException {
+        
+                        Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            
+            String sql = "DELETE FROM Class"+className+" WHERE Roll= '"+ss.getStudentroll()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+        
         
         table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
     }
@@ -367,6 +637,30 @@ selectedCells.addListener(new ListChangeListener<TablePosition>() {
         TSform.window.setTitle("                                                                            Student Details");
           }  
 }
+
+    @FXML
+    private void changeLABcellEvent(CellEditEvent editedCell) throws ClassNotFoundException, SQLException 
+    {
+                    Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            Record ss=table.getSelectionModel().getSelectedItem();
+            String val=""+editedCell.getNewValue();
+            String sql = "UPDATE Class"+className+" " +
+                    "SET LAB= '"+val+"' WHERE studentName= '"+ss.getStudentName()+"' ;";
+            stmt.executeUpdate(sql);
+            c.close();
+            stmt.close();
+            
+                Record recordSelected=table.getSelectionModel().getSelectedItem();
+                recordSelected.setStudentLab((Double) editedCell.getNewValue());
+    }
+    
+    
     }
 
 

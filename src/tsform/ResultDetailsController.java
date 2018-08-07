@@ -40,7 +40,7 @@ public class ResultDetailsController implements Initializable {
     @FXML
     private Label term3field;
     @FXML
-    private Label teacherfield;
+    private Label labfield1;
 
     /**
      * Initializes the controller class.
@@ -57,6 +57,7 @@ public class ResultDetailsController implements Initializable {
         this.term1field.setText(""+TSform.studentdetails.getStudentTerm1());
         this.term2field.setText(""+TSform.studentdetails.getStudentTerm2());
         this.term3field.setText(""+TSform.studentdetails.getStudentTerm3());
+        this.labfield1.setText(""+TSform.studentdetails.getStudentLab());
     }    
 
     @FXML

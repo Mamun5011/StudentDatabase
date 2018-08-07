@@ -30,6 +30,7 @@ public class CourseaddsuccessfullyController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        msgfield.setText(TSform.userName+" you have Successfully changed the weight for class "+TSform.clss);
     }    
 
     @FXML

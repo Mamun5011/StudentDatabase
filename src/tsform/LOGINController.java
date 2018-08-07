@@ -7,6 +7,11 @@ package tsform;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,38 +51,147 @@ public class LOGINController implements Initializable {
     @FXML
     private Label labelmsg;
 
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+    TSform.loginType="none";
+      
+     try {
+         
+     Connection c = null;
+      Statement stmt = null;
+      ResultSet rs;
+     Class.forName("org.sqlite.JDBC");
+     c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+      stmt = c.createStatement();
+               
+                        //String sql = "INSERT INTO Login " +
+             // String sql = "DELETE FROM Login;";
+                       // "VALUES ('Mamun1', '1234','Teacher');"; 
+        // stmt.executeUpdate(sql);
+         
+       rs = stmt.executeQuery( "SELECT * FROM Login;" );
+      while(rs.next())
+      {
+          String  name = rs.getString("Name");
+           String  pass = rs.getString("Password");
+          System.out.println("name: "+name);
+          System.out.println("password: "+pass);
+      }
+      
+           rs.close();
+      stmt.close();
+      c.close();
+  
+
+
+     } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      System.out.println("Opened database successfully");
     }    
 
     @FXML
-    private void LoginHandler(ActionEvent event) throws IOException {
+    private void LoginHandler(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         
        // labelmsg.setText("login!! ");
+      Connection c = null;
+      Statement stmt = null;
+      ResultSet rs;
+      Class.forName("org.sqlite.JDBC");
+      c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+      stmt = c.createStatement();
+        
+        
+          String userName= usernamefield.getText();
+          String password=paswwordfield.getText();
+           
+          int flag=0;
+          
         if(teacherbutton.isSelected())
         {
+           String tp="Teacher";
+          rs = stmt.executeQuery( "SELECT * FROM Teacher;" );
+          
+          
+                while ( rs.next() ) {
+         // i++;
+         
+           String  name = rs.getString("Name");
+           String  pass = rs.getString("Password");
+          
+
+           if(name.equals(userName) && pass.equals(password))
+           {
+           
+            TSform.userName=userName;
              TSform.loginType="teacher";
              TSform.root = FXMLLoader.load(getClass().getResource("teacherHomepage.fxml")); 
              Scene scene = new Scene(TSform.root);
              TSform.window.setScene(scene);
              TSform.window.setTitle("                                                                            welcome");
-          } 
+             flag=1;
+             break;
+           }
+           
+           
+           
+        
+      }
+      rs.close();
+      stmt.close();
+      c.close();
+          
+         if(flag==0)labelmsg.setText(" please enter your info correctly");  
+        
+        } 
         else if(principalbutton.isSelected())
         {
+            
+        rs = stmt.executeQuery( "SELECT * FROM Login;" );
+            String tp="Principal";
+          
+          
+                while ( rs.next() ) {
+         // i++;
+         
+           String  name = rs.getString("Name");
+           String  pass = rs.getString("Password");
+           String  type = rs.getString("Type");
+
+           if(name.equals(userName) && pass.equals(password) && type.equals(tp))
+           {    
+            TSform.userName=userName;
             TSform.loginType="principal";
              TSform.root = FXMLLoader.load(getClass().getResource("PrincipalHomepage.fxml")); 
              Scene scene = new Scene(TSform.root);
              TSform.window.setScene(scene);
              TSform.window.setTitle("                                                                            welcome");
-          }  
+            flag=1;
+             break;
+           }  
+           
+                }
+                
+       rs.close();
+      stmt.close();
+      c.close();
+            
+            if(flag==0)labelmsg.setText(" please enter your info correctly");    
+        }
+        
         else
         {
-             labelmsg.setText(" please select your login type");
-             TSform.loginType="none";
+            if(TSform.loginType=="none") labelmsg.setText(" please select your login type");
+            else if(flag==0)labelmsg.setText(" please enter your info correctly");
+           
+            
+             
         }
            
             

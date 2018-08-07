@@ -7,7 +7,14 @@ package tsform;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,22 +45,79 @@ public class AddteacherController implements Initializable {
             FXCollections.observableArrayList("Bangla","English","Physics","Chemistry","Math");*/
     @FXML
     private Button createCoursebutton;
+    
+    ObservableList<String>teacherName=FXCollections.observableArrayList(); 
+    ObservableList<String>courseName=FXCollections.observableArrayList(); 
+    @FXML
+    private ChoiceBox<String> classlist;
+
+
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        if(TSform.teachernameList.size()>0)teacherlist.setValue(TSform.teachernameList.get(0));
-        
-        teacherlist.setItems(TSform.teachernameList);
-        
-        String S1=teacherlist.getValue();  // Thus we get value
-        
-         if(TSform.coursenameList.size()>0) courselist.setValue(TSform.coursenameList.get(0));
-       // courselist.setValue("Bangla");
-        courselist.setItems(TSform.coursenameList);
+        try {
+            // TODO
+            
+            Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                
+                try {
+                    c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddteacherController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                stmt = c.createStatement();
+                rs = stmt.executeQuery( "SELECT * FROM Teacher;" );
+                while(rs.next())
+                {
+                    String  nm = rs.getString("Name");
+                    teacherName.add(nm);
+                    
+                }
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AddteacherController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AddteacherController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(teacherName.size()>0)teacherlist.setValue(teacherName.get(0));
+            
+            teacherlist.setItems(teacherName);
+            classlist.setValue(TSform.classname.get(0));
+            classlist.setItems(TSform.classname);
+            
+            
+            
+            try {
+                rs = stmt.executeQuery( "SELECT * FROM Course;" );
+            } catch (SQLException ex) {
+                Logger.getLogger(AddteacherController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while(rs.next())
+            {
+                String  nm = rs.getString("CourseName");
+                courseName.add(nm);
+                
+            }
+            
+            if(courseName.size()>0) courselist.setValue(courseName.get(0));
+            // courselist.setValue("Bangla");
+            courselist.setItems(courseName);
+            
+            c.close();
+            rs.close();
+            stmt.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddteacherController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         
@@ -75,21 +139,36 @@ public class AddteacherController implements Initializable {
 
 
     @FXML
-    private void createCoursebuttonhandler(ActionEvent event) throws IOException {
-        TSform.root = FXMLLoader.load(getClass().getResource("addWeight.fxml")); 
+    private void createCoursebuttonhandler(ActionEvent event) throws IOException, ClassNotFoundException, SQLException {
+        TSform.teacherName=teacherlist.getValue();  // Thus we get value
+        TSform.courseName=courselist.getValue();
+        TSform.clss=classlist.getValue();
+        
+        TSform.root = FXMLLoader.load(getClass().getResource("weightAdd.fxml")); 
         Scene scene = new Scene(TSform.root);          
         TSform.window.setScene(scene);
         TSform.window.setTitle("                                                                            Welcome");
+       
+
+        
+
         
     } 
 
     @FXML
     private void changeWeightButton(ActionEvent event) throws IOException {
-        TSform.root = FXMLLoader.load(getClass().getResource("ChangeWeight.fxml")); 
+        
+        TSform.teacherName=teacherlist.getValue();  // Thus we get value
+        TSform.courseName=courselist.getValue();
+        TSform.clss=classlist.getValue(); 
+        
+        TSform.root = FXMLLoader.load(getClass().getResource("newWeight.fxml")); 
         Scene scene = new Scene(TSform.root);          
         TSform.window.setScene(scene);
         TSform.window.setTitle("                                                                            Welcome");
         
+
+
     } 
 
     

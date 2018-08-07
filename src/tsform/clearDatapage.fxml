@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.ClearDatapageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="371.0" layoutX="27.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="557.0" />
+      <Label layoutX="137.0" layoutY="72.0" prefHeight="40.0" prefWidth="102.0" text="Current Password" />
+      <Label layoutX="137.0" layoutY="118.0" prefHeight="32.0" prefWidth="102.0" text="Confirm Password" />
+      <Button layoutX="302.0" layoutY="186.0" mnemonicParsing="false" onAction="#confirmhandler" text="Confirm" />
+      <Button layoutX="67.0" layoutY="322.0" mnemonicParsing="false" onAction="#backbuttonhandler" text="Back" />
+      <Label fx:id="msgbox" layoutX="130.0" layoutY="34.0" prefHeight="32.0" prefWidth="314.0" />
+      <PasswordField fx:id="currpassword" layoutX="257.0" layoutY="80.0" />
+      <PasswordField fx:id="conpassword" layoutX="257.0" layoutY="122.0" />
+   </children>
+</AnchorPane>

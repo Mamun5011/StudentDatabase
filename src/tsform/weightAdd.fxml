@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.WeightAddController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="371.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="575.0" />
+      <Label layoutX="122.0" layoutY="70.0" prefHeight="26.0" prefWidth="55.0" text="CT 1" />
+      <Label layoutX="122.0" layoutY="103.0" prefHeight="26.0" prefWidth="55.0" text="CT 2" />
+      <Label layoutX="122.0" layoutY="135.0" prefHeight="26.0" prefWidth="55.0" text="CT 3" />
+      <Label layoutX="122.0" layoutY="168.0" prefHeight="26.0" prefWidth="55.0" text="TERM 1" />
+      <Label layoutX="122.0" layoutY="197.0" prefHeight="26.0" prefWidth="55.0" text="TERM 2" />
+      <Label layoutX="122.0" layoutY="230.0" prefHeight="26.0" prefWidth="55.0" text="TERM 3" />
+      <Label layoutX="122.0" layoutY="262.0" prefHeight="26.0" prefWidth="55.0" text="LAB" />
+      <TextField fx:id="CT1" layoutX="177.0" layoutY="70.0" />
+      <TextField fx:id="CT2" layoutX="177.0" layoutY="103.0" />
+      <TextField fx:id="TERM1" layoutX="177.0" layoutY="168.0" />
+      <TextField fx:id="CT3" layoutX="177.0" layoutY="135.0" />
+      <TextField fx:id="TERM2" layoutX="177.0" layoutY="198.0" />
+      <TextField fx:id="TERM3" layoutX="177.0" layoutY="230.0" />
+      <TextField fx:id="LAB" layoutX="177.0" layoutY="262.0" />
+      <Button layoutX="54.0" layoutY="331.0" mnemonicParsing="false" onAction="#backButtonhandler" text="BACK" />
+      <Button layoutX="252.0" layoutY="331.0" mnemonicParsing="false" onAction="#confirmButtonhandler" text="Confirm" />
+      <Label fx:id="msgbox" layoutX="185.0" layoutY="20.0" prefHeight="37.0" prefWidth="134.0" text="Give Your Weight" />
+   </children>
+</AnchorPane>

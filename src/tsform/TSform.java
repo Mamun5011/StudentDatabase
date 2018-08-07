@@ -25,11 +25,17 @@ public class TSform extends Application {
     public static Stage window;
     public static Record studentdetails;
      public static admissionRecord admissionStudentdetails;
-     public static ObservableList<String>teachernameList=FXCollections.observableArrayList("Mr. Rahim","Mr. Karim","Mrs. rahima");;
-     public static ObservableList<String>coursenameList= FXCollections.observableArrayList("Bangla","English","Physics","Chemistry","Math");;
 
-    public static Record testRecord=new Record(4,"Raj",3.00,4.00,5.00,6.00,7.00,1.00);
+     public static String teacherName;
+     public static String courseName;
+     public static String clss;
+     public static String subject;
+     public static ObservableList<String>classname=FXCollections.observableArrayList("6","7","8","9","10");
+    
+    public static Record testRecord=new Record(4,"Raj",3.00,4.00,5.00,6.00,7.00,1.00,25.00);
     public static String loginType;
+        public static String userName;
+
     public static int count=1;
     public static String S="Student Evaluation System";
 
@@ -37,6 +43,7 @@ public class TSform extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException
     {
+        
         root = FXMLLoader.load(getClass().getResource("LOGIN.fxml")); 
         
         Scene scene = new Scene(root);   

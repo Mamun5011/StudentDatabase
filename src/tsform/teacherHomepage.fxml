@@ -32,5 +32,11 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label alignment="CENTER" layoutX="60.0" layoutY="71.0" prefHeight="35.0" prefWidth="239.0" text="Please select your Subject" textFill="#d4e012">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="subjectchoicebox" layoutX="312.0" layoutY="76.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

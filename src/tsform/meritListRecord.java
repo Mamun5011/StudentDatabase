@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package tsform;
 
 import javafx.beans.property.IntegerProperty;
@@ -6,8 +10,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
- public class Record {
-        private  SimpleIntegerProperty studentroll;    
+/**
+ *
+ * @author Mamun
+ */
+public class meritListRecord {
+    
+            private  SimpleIntegerProperty studentroll;    
         private  SimpleStringProperty studentName;
          private SimpleDoubleProperty studentCt1;
          private SimpleDoubleProperty studentCt2;
@@ -16,14 +25,10 @@ import javafx.beans.property.SimpleStringProperty;
           private SimpleDoubleProperty studentTerm2;
            private SimpleDoubleProperty studentTerm3;
            private SimpleDoubleProperty studentLab;
+           private SimpleDoubleProperty studentMarks;
            
-           
-           
-           
-           
-         
-        Record(int i, String v0, Double v1, Double v2, Double v3, 
-                Double v4,Double v5,Double  v6,Double v7) {
+                   meritListRecord(int i, String v0, Double v1, Double v2, Double v3, 
+                Double v4,Double v5,Double  v6,Double v7,Double v8) {
             this.studentroll = new SimpleIntegerProperty(i);
             this.studentName = new SimpleStringProperty(v0);
             this.studentCt1 = new SimpleDoubleProperty(v1);
@@ -33,12 +38,12 @@ import javafx.beans.property.SimpleStringProperty;
             this.studentTerm2 = new SimpleDoubleProperty(v5);
             this.studentTerm3 = new SimpleDoubleProperty(v6);
             this.studentLab= new SimpleDoubleProperty(v7);
+            this.studentMarks=new SimpleDoubleProperty(v8);
         }
-        
-        
-     
-
-    public Integer getStudentroll() {
+                   
+         
+                   
+         public Integer getStudentroll() {
         return this.studentroll.get();
     }
 
@@ -124,7 +129,17 @@ import javafx.beans.property.SimpleStringProperty;
                         public void  setStudentLab(Double a) {
          this.studentLab.set(a);// = new SimpleDoubleProperty(a);
     }
-         
-      
-         
-    };
+                        
+       public Double getStudentMarks() {
+        return studentMarks.get();
+    }    
+    
+                        public void  setStudentMarks(Double a) {
+         this.studentMarks.set(a);// = new SimpleDoubleProperty(a);
+    }                     
+                       
+    
+    
+}
+
+

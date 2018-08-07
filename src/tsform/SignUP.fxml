@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.SignUPController">
    <children>
-      <Text fill="#0f0cbf" layoutX="249.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
+      <Text fill="#0f0cbf" layoutX="249.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
          <font>
             <Font size="24.0" />
          </font>
@@ -24,7 +24,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fill="#d70d0d" layoutX="49.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conatct Number">
+      <Text fill="#d70d0d" layoutX="49.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Number">
          <font>
             <Font size="16.0" />
          </font>
@@ -40,30 +40,17 @@
          </font>
       </Text>
       <TextField fx:id="nameField" layoutX="207.0" layoutY="88.0" prefHeight="32.0" prefWidth="300.0" promptText="Enter your name" />
-      <TextField fx:id="passwordfield" layoutX="207.0" layoutY="134.0" prefHeight="32.0" prefWidth="243.0" promptText="Enter your Password" />
-      <TextField fx:id="confpasswordfield" layoutX="207.0" layoutY="175.0" prefHeight="32.0" prefWidth="243.0" promptText="confirm you password" />
       <TextField fx:id="numberfield" layoutX="207.0" layoutY="213.0" prefHeight="32.0" prefWidth="185.0" promptText="your contact number" />
       <TextField fx:id="emailfield" layoutX="207.0" layoutY="255.0" prefHeight="32.0" prefWidth="185.0" promptText="enter you email" />
-      <Text fill="#d70808" layoutX="96.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation">
+      <Button layoutX="151.0" layoutY="321.0" mnemonicParsing="false" onAction="#backbuttonHandler" text="Back" textFill="#d30b0b" />
+      <Button layoutX="274.0" layoutY="321.0" mnemonicParsing="false" onAction="#SignUpbuttonHandler" text="SignUp" textFill="#d70909" />
+      <Label fx:id="labelmsg" alignment="CENTER" layoutX="329.0" layoutY="51.0" prefHeight="31.0" prefWidth="236.0" textFill="#da0f0f">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
-      </Text>
-      <RadioButton layoutX="216.0" layoutY="301.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="87.0" text="Principal" textFill="#5f0fd9">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="principal" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton layoutX="303.0" layoutY="303.0" mnemonicParsing="false" text="Teacher" textFill="#390fdb" toggleGroup="$principal">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </RadioButton>
-      <Button layoutX="181.0" layoutY="346.0" mnemonicParsing="false" onAction="#backbuttonHandler" text="Back" textFill="#d30b0b" />
-      <Button layoutX="303.0" layoutY="346.0" mnemonicParsing="false" onAction="#SignUpbuttonHandler" text="SignUp" textFill="#d70909" />
+      </Label>
+      <PasswordField fx:id="passwordfield" layoutX="208.0" layoutY="134.0" prefHeight="31.0" prefWidth="243.0" promptText="Password" />
+      <PasswordField fx:id="confpasswordfield" layoutX="204.0" layoutY="175.0" prefHeight="31.0" prefWidth="249.0" promptText="confirm you password" />
    
   
    </children>

@@ -73,5 +73,11 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <ChoiceBox fx:id="subjchoicebox" layoutX="173.0" layoutY="100.0" prefWidth="150.0" />
+      <Label fx:id="msgfield1" alignment="CENTER" layoutX="88.0" layoutY="99.0" prefHeight="27.0" prefWidth="85.0" text="Subject" textFill="#eb2121">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.AddteacherController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="6.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="588.0" />
-      <Label layoutX="46.0" layoutY="113.0" text="select your teacher" textFill="#e41414">
+      <Label layoutX="46.0" layoutY="74.0" text="select your teacher" textFill="#e41414">
          <font>
             <Font size="18.0" />
          </font>
@@ -21,7 +21,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="teacherlist" layoutX="237.0" layoutY="114.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="teacherlist" layoutX="237.0" layoutY="75.0" prefWidth="150.0" />
       <ChoiceBox fx:id="courselist" layoutX="237.0" layoutY="174.0" prefWidth="150.0" />
       <Button fx:id="backbutton" layoutX="46.0" layoutY="326.0" mnemonicParsing="false" onAction="#backbuttonhandler" prefHeight="25.0" prefWidth="65.0" text="Back" textFill="#e80f0f">
          <font>
@@ -38,5 +38,11 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label layoutX="46.0" layoutY="125.0" text="select your Class" textFill="#e41414">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="classlist" layoutX="237.0" layoutY="126.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

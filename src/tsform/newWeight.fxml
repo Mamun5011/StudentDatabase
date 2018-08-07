@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.NewWeightController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="355.0" layoutX="17.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="571.0" />
+      <Label layoutX="104.0" layoutY="71.0" prefHeight="31.0" prefWidth="54.0" text="CT1" />
+      <Label layoutX="104.0" layoutY="102.0" prefHeight="31.0" prefWidth="54.0" text="CT2" />
+      <Label layoutX="104.0" layoutY="133.0" prefHeight="31.0" prefWidth="54.0" text="CT3" />
+      <Label layoutX="93.0" layoutY="164.0" prefHeight="31.0" prefWidth="54.0" text="TERM 1" />
+      <Label layoutX="93.0" layoutY="195.0" prefHeight="31.0" prefWidth="54.0" text="TERM 2" />
+      <Label layoutX="93.0" layoutY="226.0" prefHeight="31.0" prefWidth="54.0" text="TERM 3" />
+      <Label layoutX="104.0" layoutY="257.0" prefHeight="31.0" prefWidth="32.0" text="LAB" />
+      <TextField fx:id="CT1" layoutX="176.0" layoutY="74.0" />
+      <TextField fx:id="CT2" layoutX="176.0" layoutY="105.0" />
+      <TextField fx:id="CT3" layoutX="176.0" layoutY="136.0" />
+      <TextField fx:id="TERM1" layoutX="176.0" layoutY="167.0" />
+      <TextField fx:id="TERM2" layoutX="176.0" layoutY="198.0" />
+      <TextField fx:id="TERM3" layoutX="176.0" layoutY="229.0" />
+      <TextField fx:id="LAB" layoutX="176.0" layoutY="260.0" />
+      <Button layoutX="78.0" layoutY="327.0" mnemonicParsing="false" onAction="#backbuttonhandler" text="Back" />
+      <Button layoutX="251.0" layoutY="334.0" mnemonicParsing="false" onAction="#confirmHandler" text="Confirm" />
+      <Label fx:id="msgbox" layoutX="213.0" layoutY="27.0" prefHeight="31.0" prefWidth="90.0" text="Changed Weight" />
+   </children>
+</AnchorPane>

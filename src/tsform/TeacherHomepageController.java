@@ -7,7 +7,14 @@ package tsform;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,22 +38,74 @@ public class TeacherHomepageController implements Initializable {
     @FXML
     private Button backbutton;
     
-        ObservableList<String>classList=
-            FXCollections.observableArrayList("3","7","9","10");
+        //ObservableList<String>classList=FXCollections.observableArrayList("3","7","9","10");
+            ObservableList<String>classList=FXCollections.observableArrayList();
+            ObservableList<String>subjectList=FXCollections.observableArrayList();
+
+    @FXML
+    private ChoiceBox<String> subjectchoicebox;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-                        classchoicebox.setValue("3");
-                        classchoicebox.setItems(classList);
-                        String S1=classchoicebox.getValue();
+        try {
+            // TODO
+            // classchoicebox.setValue("3");
+            Connection c = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+        
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:src\\tsform\\TSFORM");
+            stmt = c.createStatement();
+            
+            
+            rs = stmt.executeQuery( "SELECT DISTINCT Class FROM AssignCourse WHERE TeacherName='"+TSform.userName+"';" );
+
+            while(rs.next())
+            {
+                String  nm = rs.getString("Class");
+                classList.add(nm);
+                
+            }
+            if(classList.size()>0) classchoicebox.setValue(classList.get(0));
+            classchoicebox.setItems(classList);
+            
+            rs.close();
+        ResultSet rs1 = stmt.executeQuery( "SELECT DISTINCT CourseName FROM AssignCourse WHERE TeacherName='"+TSform.userName+"';" );
+
+            while(rs1.next())
+            {
+                String  nm = rs1.getString("CourseName");
+                subjectList.add(nm);
+               // System.out.println("YEs-------------------------------->>>>");
+               // System.out.println(""+nm);
+                
+            }
+            if(subjectList.size()>0) subjectchoicebox.setValue(subjectList.get(0));
+            subjectchoicebox.setItems(subjectList); 
+            rs1.close();
+            stmt.close();
+            c.close();
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TeacherHomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TeacherHomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+        
     }    
 
     @FXML
     private void confirmbuttonhandler(ActionEvent event) throws IOException {
+        TSform.subject=subjectchoicebox.getValue();
+        TSform.clss=classchoicebox.getValue();
+        
         TSform.root = FXMLLoader.load(getClass().getResource("class3table.fxml")); 
         Scene scene = new Scene(TSform.root);          
         TSform.window.setScene(scene);
