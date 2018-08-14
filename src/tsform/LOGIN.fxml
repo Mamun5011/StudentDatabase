@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
@@ -8,29 +9,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.LOGINController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tsform.LOGINController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002831" height="528.0" layoutX="-9.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="664.0" />
-      <TextField fx:id="usernamefield" layoutX="76.0" layoutY="118.0" prefHeight="37.0" prefWidth="494.0" promptText="Username" />
-      <Text fx:id="welcomeText" fill="#d918bf" layoutX="250.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" textAlignment="CENTER" wrappingWidth="145.13671875">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#002831" height="599.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="707.0" />
+      <TextField fx:id="usernamefield" layoutX="85.0" layoutY="180.0" prefHeight="37.0" prefWidth="494.0" promptText="Username" />
+      <Text fx:id="welcomeText" fill="#d918bf" layoutX="259.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" textAlignment="CENTER" wrappingWidth="145.13671875">
          <font>
             <Font size="24.0" />
          </font></Text>
       
-      <Button fx:id="loginAction" layoutX="262.0" layoutY="288.0" mnemonicParsing="false" onAction="#LoginHandler" prefHeight="31.0" prefWidth="96.0" text="Login" textFill="#da0808">
+      <Button fx:id="loginAction" layoutX="271.0" layoutY="350.0" mnemonicParsing="false" onAction="#LoginHandler" prefHeight="31.0" prefWidth="96.0" text="Login" textFill="#da0808">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="signupaction" layoutX="469.0" layoutY="357.0" mnemonicParsing="false" onAction="#signupHandler" prefHeight="31.0" prefWidth="90.0" text="SignUp" textFill="#e41212">
+      <Button fx:id="signupaction" layoutX="478.0" layoutY="419.0" mnemonicParsing="false" onAction="#signupHandler" prefHeight="31.0" prefWidth="90.0" text="SignUp" textFill="#e41212">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Text fill="#d40d9f" layoutX="310.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet?" wrappingWidth="131.0">
+      <Text fill="#d40d9f" layoutX="319.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not registered yet?" wrappingWidth="131.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <RadioButton fx:id="principalbutton" layoutX="76.0" layoutY="259.0" mnemonicParsing="false" text="Principal" textFill="#e50bbf">
+      <RadioButton fx:id="principalbutton" layoutX="85.0" layoutY="321.0" mnemonicParsing="false" text="Principal" textFill="#e50bbf">
          <font>
             <Font size="14.0" />
          </font>
@@ -38,12 +39,12 @@
             <ToggleGroup fx:id="principle" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="teacherbutton" layoutX="194.0" layoutY="259.0" mnemonicParsing="false" text="Teacher" textFill="#c311a8" toggleGroup="$principle">
+      <RadioButton fx:id="teacherbutton" layoutX="203.0" layoutY="321.0" mnemonicParsing="false" text="Teacher" textFill="#c311a8" toggleGroup="$principle">
          <font>
             <Font size="14.0" />
          </font>
       </RadioButton>
-      <Label fx:id="labelmsg" alignment="CENTER" layoutX="134.0" layoutY="72.0" prefHeight="31.0" prefWidth="278.0" textFill="#da0f0f">
+      <Label fx:id="labelmsg" alignment="CENTER" layoutX="209.0" layoutY="103.0" prefHeight="31.0" prefWidth="290.0" textFill="#da0f0f">
          <font>
             <Font size="18.0" />
          </font>
@@ -53,6 +54,16 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="paswwordfield" layoutX="74.0" layoutY="199.0" prefHeight="37.0" prefWidth="494.0" promptText="Password" />
+      <PasswordField fx:id="paswwordfield" layoutX="83.0" layoutY="261.0" prefHeight="37.0" prefWidth="494.0" promptText="Password" />
+      <ImageView fitHeight="165.0" fitWidth="173.0">
+         <image>
+            <Image url="@../../resources/logo%20-%20Copy.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="165.0" fitWidth="173.0" layoutX="533.0" layoutY="7.0">
+         <image>
+            <Image url="@../../resources/logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
