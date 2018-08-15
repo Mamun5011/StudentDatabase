@@ -1,20 +1,15 @@
 
 package tsform;
 
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Element;
-import java.awt.Image;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import javafx.scene.text.Font;
-import javax.swing.text.Document;
-import static sun.plugin.javascript.navig.JSType.Image;
+import java.util.Calendar;
 
 /**
  *
@@ -100,9 +95,10 @@ public class StudentReport {
     }
 
     private  void addTitlePage(Document document)
-            throws DocumentException {
+            throws DocumentException, BadElementException, IOException {
 
-        String year = Integer.toString(LocalDate.now().getYear());
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String year = ""+currentYear;
         String exam = term+", "+year;
         Image img = null;
         img = Image.getInstance("resources/logo.jpg");

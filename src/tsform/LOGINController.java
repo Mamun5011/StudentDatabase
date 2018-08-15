@@ -23,6 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import static tsform.TSform.window;
 
@@ -50,6 +52,10 @@ public class LOGINController implements Initializable {
     private ToggleGroup principle;
     @FXML
     private Label labelmsg;
+    @FXML
+    private ImageView leftImage;
+    @FXML
+    private ImageView rightImage;
 
 
     /**
@@ -59,6 +65,16 @@ public class LOGINController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     TSform.loginType="none";
+    // this.leftImage =  new ImageView(new Image(getClass().getResourceAsStream("src\\tsform\\logo.jpg")));
+    
+       // Image image = new Image("resources\\img\\logo.jpg");
+       // leftImage.setImage(image);
+       // leftImage.setCache(true);
+      Image i=new Image("resources\\img\\logo.jpg");
+    //leftImage.setImage(new Image("..\\..\\resources\\img\\logo.jpg"));
+       
+        
+        
       
      try {
          
